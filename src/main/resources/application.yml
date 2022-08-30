@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: desafio-votacao/api
+    version: 1.0.0
+  profiles:
+    active: local
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+---
+spring:
+  profiles: local
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/basedesafio
+    username: desafio
+    password: senhadesafio
+    platform: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure.jdbc: DEBUG
+    com.zaxxer.hikari.HikariDataSource: DEBUG
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.springframework.jdbc.core.StatementCreatorUtils: DEBUG
+    org.springframework.ws.client.MessageTracing.received: DEBUG
+    org.springframework.ws.client.MessageTracing.sent: DEBUG
+    org.springframework.ws.server.MessageTracing.received: DEBUG
+    org.springframework.ws.server.MessageTracing.sent: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    br.com.sulamerica.susis.util.XMLGregorianCalendarUtil: DEBUG
+    org:
+      springframework:
+        web: DEBUG
+        data:
+          convert: DEBUG
+          datastore: DEBUG
+      keycloak: DEBUG
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /swagger-ui.html
+    display-request-duration: true
+    operations-sorter: method
+  api-docs:
+    resolve-schema-properties: true
+    show-actuator: true
+    enabled: true
+
+---
