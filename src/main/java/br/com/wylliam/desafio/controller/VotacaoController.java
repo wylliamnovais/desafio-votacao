@@ -3,6 +3,7 @@ package br.com.wylliam.desafio.controller;
 import br.com.wylliam.desafio.domain.entity.dto.PautaRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.VotoRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.VotoResponseDTO;
+import br.com.wylliam.desafio.exception.ResponseError;
 import br.com.wylliam.desafio.service.VotacaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -32,8 +33,8 @@ public class VotacaoController {
     @Operation(summary = "Endpoint Responsável por votar na Pauta.", description = "Método para enviar a votação do associado a pauta.", tags = {"Votação"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Voto computado com Sucesso.", content = @Content(schema = @Schema(implementation = VotoResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Erro da Aplicação"),
-            @ApiResponse(responseCode = "500", description = "Erro do Servidor")
+            @ApiResponse(responseCode = "400", description = "Erro da Aplicação", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseError.class)))),
+            @ApiResponse(responseCode = "500", description = "Erro do Servidor", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseError.class))))
     })
     public ResponseEntity<?> votacao(@RequestBody VotoRequestDTO dto) {
         return ResponseEntity.ok(votacaoService.votar(dto));

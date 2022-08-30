@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -25,9 +27,7 @@ public class Associado {
     @Column(name = "nome", nullable = true)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "votacaov_2_id")
-    private Votacao votacao;
-
+    @OneToMany(mappedBy = "associado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Votacao> votacoes = new ArrayList<>();
 
 }

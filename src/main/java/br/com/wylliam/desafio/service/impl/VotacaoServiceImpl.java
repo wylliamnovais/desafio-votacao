@@ -14,6 +14,8 @@ import br.com.wylliam.desafio.service.VotacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class VotacaoServiceImpl implements VotacaoService {
 
@@ -29,44 +31,49 @@ public class VotacaoServiceImpl implements VotacaoService {
 
     @Override
     public VotoResponseDTO votar(VotoRequestDTO dto) {
-        try {
             Votacao votacao = new Votacao();
             votacao.setVoto(dto.getVoto());
 
-            Pauta pauta = verificaPauta(dto.getPauta());
+            Pauta pauta = validarTempoLimitePauta(dto.getPauta());
             votacao.setPauta(pauta);
 
             Associado associado = validarAssociado(dto.getAssociado(), pauta);
-            votacao.getAssociados().add(associado);
+            votacao.setAssociado(associado);
 
             Votacao votacaoResult = votacaoRepository.save(votacao);
 
             return preencheRetorno(votacaoResult);
-        } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Cadastrar Associado", ex);
-        }
     }
 
     private VotoResponseDTO preencheRetorno(Votacao votacaoResult) {
         VotoResponseDTO dto = new VotoResponseDTO();
         dto.setId(votacaoResult.getId());
-        dto.setCpf(votacaoResult.getAssociados().stream().findFirst().get().getCpf());
-        dto.setIdAssociado(votacaoResult.getAssociados().stream().findFirst().get().getId());
+        dto.setCpf(votacaoResult.getAssociado().getCpf());
+        dto.setIdAssociado(votacaoResult.getAssociado().getId());
         dto.setDescricaoPauta(votacaoResult.getPauta().getDescricao());
         dto.setIdPauta(votacaoResult.getPauta().getId());
         return dto;
     }
 
-    private Pauta verificaPauta(Long pauta) {
+    private Pauta validarTempoLimitePauta(Long pauta) {
+        Pauta pautaRetorno = pautaService.consultarPautasPorId(pauta);
+
+        Date atual = new Date();
+        boolean tempoEsgotado = atual.after(pautaRetorno.getDataFechamentoVotacao());
+
+        if (tempoEsgotado) {
+            throw new RegraDeNegocioException("Votação da Pauta já está encerrada!");
+        }
+
         return pautaService.consultarPautasPorId(pauta);
     }
 
     private Associado validarAssociado(Long associado, Pauta pauta) {
 
         Associado associadoRetorno = associadoService.consultarAssociadoPorId(associado);
-        boolean associadoVotou = votacaoRepository.validarVotoAssociado(associadoRetorno.getId());
+        boolean associadoVotou = votacaoRepository.existsByAssociado_IdIs(associadoRetorno.getId());
 
-        if(associadoVotou){
+        if (associadoVotou) {
             throw new RegraDeNegocioException("Associado já votou nessa Pauta!");
         }
 

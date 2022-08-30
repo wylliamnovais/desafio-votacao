@@ -55,31 +55,28 @@ public class AssociadoServiceImpl implements AssociadoService {
 
     private void validarCPF(String cpf) {
 
-        try {
-            logger.info("[VALIDAÇÃO DO CPF]");
+        logger.info("[VALIDAÇÃO DO CPF]");
 
-            RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
-            URI uri = URI.create("https://user-info.herokuapp.com/users/" + cpf);
-            ResponseEntity<String> resposta = restTemplate.getForEntity(uri, String.class);
+        URI uri = URI.create("https://user-info.herokuapp.com/users/" + cpf);
+        ResponseEntity<String> resposta = restTemplate.getForEntity(uri, String.class);
 
-            if (resposta.getStatusCode().is2xxSuccessful() && Strings.isNotBlank(resposta.getBody())) {
+        if (resposta.getStatusCode().is2xxSuccessful() && Strings.isNotBlank(resposta.getBody())) {
 
-                Gson gson = new Gson();
-                StatusCpfDTO statusCpfDTO = gson.fromJson(resposta.getBody(), StatusCpfDTO.class);
+            Gson gson = new Gson();
+            StatusCpfDTO statusCpfDTO = gson.fromJson(resposta.getBody(), StatusCpfDTO.class);
 
-                CpfValidateEnum cpfValidateEnum = CpfValidateEnum.valueOfDescricao(statusCpfDTO.getStatus());
+            CpfValidateEnum cpfValidateEnum = CpfValidateEnum.valueOfDescricao(statusCpfDTO.getStatus());
 
-                if (CpfValidateEnum.NAO_PODE_VOTAR == cpfValidateEnum) {
-                    throw new RegraDeNegocioException("Associado Não pode Votar");
-                }
-            } else {
-                throw new RegraDeNegocioException("CPF Inválido");
+            if (CpfValidateEnum.NAO_PODE_VOTAR == cpfValidateEnum) {
+                throw new RegraDeNegocioException("Associado Não pode Votar");
             }
 
-        } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Validar CPF", ex);
+        } else {
+            throw new RegraDeNegocioException("CPF Inválido");
         }
+
     }
 
     @Override

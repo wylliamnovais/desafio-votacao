@@ -28,10 +28,10 @@ public class Pauta {
     @Column(name = "tempo_liberado", nullable = true)
     private Integer tempoLiberado;
 
-    @Column(name = "descricao", nullable = true)
+    @Column(name = "data_fechamento", nullable = true)
     private Date dataFechamentoVotacao;
 
     @OneToMany(mappedBy = "pauta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Votacao> votacao = new ArrayList<>();
+    private List<Votacao> votacoes = new ArrayList<>();
 
 }

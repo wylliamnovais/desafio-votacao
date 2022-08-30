@@ -2,9 +2,9 @@ package br.com.wylliam.desafio.controller;
 
 import br.com.wylliam.desafio.domain.entity.dto.PautaRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.PautaResponseDTO;
+import br.com.wylliam.desafio.domain.entity.dto.VotacaoResponseDTO;
 import br.com.wylliam.desafio.exception.ResponseError;
 import br.com.wylliam.desafio.service.PautaService;
-import br.com.wylliam.desafio.service.VotacaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -46,6 +46,17 @@ public class PautaController {
     })
     public ResponseEntity<?> consultarPautas() {
         return ResponseEntity.ok(pautaService.consultarPautas());
+    }
+
+    @GetMapping("/{id_pauta}")
+    @Operation(summary = "Endpoint Responsável por Consultar o resultado da Votação.", description = "Método para consulta os votos da pauta.", tags = {"Pauta"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pauta Cadastrada", content = @Content(schema = @Schema(implementation = VotacaoResponseDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Erro da Aplicação", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseError.class)))),
+            @ApiResponse(responseCode = "500", description = "Erro do Servidor", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ResponseError.class))))
+    })
+    public ResponseEntity<?> consultarPautas(@Parameter(name = "id_pauta", description = "Id da pauta.", required = true) @PathVariable(name = "id_pauta") Long idPauta) {
+        return ResponseEntity.ok(pautaService.consultarDadosVotacaoPauta(idPauta));
     }
 
     @PutMapping(value = "/{id_pauta}")

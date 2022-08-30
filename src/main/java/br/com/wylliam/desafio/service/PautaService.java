@@ -2,6 +2,7 @@ package br.com.wylliam.desafio.service;
 
 import br.com.wylliam.desafio.domain.entity.dto.PautaRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.PautaResponseDTO;
+import br.com.wylliam.desafio.domain.entity.dto.VotacaoResponseDTO;
 import br.com.wylliam.desafio.domain.entity.entity.Pauta;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface PautaService {
     List<PautaResponseDTO> consultarPautas();
 
     Pauta consultarPautasPorId(Long id);
+
+    VotacaoResponseDTO consultarDadosVotacaoPauta(Long id);
 
     String abrirVotacao(Long idPauta, Integer tempoLimite);
 }

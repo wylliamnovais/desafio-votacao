@@ -2,7 +2,9 @@ package br.com.wylliam.desafio.service.impl;
 
 import br.com.wylliam.desafio.domain.entity.dto.PautaRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.PautaResponseDTO;
+import br.com.wylliam.desafio.domain.entity.dto.VotacaoResponseDTO;
 import br.com.wylliam.desafio.domain.entity.entity.Pauta;
+import br.com.wylliam.desafio.domain.entity.entity.Votacao;
 import br.com.wylliam.desafio.exception.ExceptionDefault;
 import br.com.wylliam.desafio.exception.RegraDeNegocioException;
 import br.com.wylliam.desafio.repository.PautaRepository;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -41,7 +44,6 @@ public class PautaServiceImpl implements PautaService {
             Pauta pautaRetorno = pautaRepository.save(pauta);
 
             PautaResponseDTO response = preencheRetorno(pautaRetorno);
-            logger.info("[PAUTA CADASTRADA] " + response.getId());
             return response;
         } catch (Exception ex) {
             throw new ExceptionDefault("Erro no método Cadastrar Associado", ex);
@@ -69,14 +71,28 @@ public class PautaServiceImpl implements PautaService {
 
     @Override
     public Pauta consultarPautasPorId(Long id) {
-        try {
             logger.info("[CONSULTANDO PAUTA POR ID] " + id);
             Optional<Pauta> byId = pautaRepository.findById(id);
             return Optional.ofNullable(byId.get()).orElseThrow(() -> new RegraDeNegocioException("Pauta não encontrada para Votação"));
+    }
+
+    @Override
+    public VotacaoResponseDTO consultarDadosVotacaoPauta(Long id) {
+        try {
+            Pauta pauta = consultarPautasPorId(id);
+
+            VotacaoResponseDTO dto = new VotacaoResponseDTO();
+
+            Map<Boolean, Long> collect = pauta.getVotacoes().stream().collect(Collectors.groupingBy(Votacao::getVoto, Collectors.counting()));
+            dto.setSim(collect.get(Boolean.TRUE));
+            dto.setSim(collect.get(Boolean.FALSE));
+            dto.setPauta(preencheRetorno(pauta));
+            return dto;
         } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Cadastrar Associado", ex);
+            throw new ExceptionDefault("Erro no método Consultar Pauta", ex);
         }
     }
+
 
     @Override
     public String abrirVotacao(Long idPauta, Integer tempoLimite) {
@@ -90,7 +106,7 @@ public class PautaServiceImpl implements PautaService {
             pauta.setDataFechamentoVotacao(dataFinal);
 
             pautaRepository.save(pauta);
-            return "Votação da Pauta " + pauta.getDescricao() + " Iniciada com Sucesso!";
+            return "Votação da Pauta " + pauta.getId() + " Iniciada com Sucesso!";
         } catch (Exception ex) {
             throw new ExceptionDefault("Votação da Pauta não iniciada", ex);
         }

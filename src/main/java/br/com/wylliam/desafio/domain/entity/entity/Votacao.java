@@ -28,7 +28,8 @@ public class Votacao {
     @JoinColumn(name = "pauta")
     private Pauta pauta;
 
-    @OneToMany(mappedBy = "votacao", orphanRemoval = true)
-    private List<Associado> associados = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "associado")
+    private Associado associado;
 
 }

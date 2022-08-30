@@ -8,9 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VotacaoRepository extends JpaRepository<Votacao, Long> {
 
-    @Query("select (count(v) > 0) from Votacao v inner join v.associados associados where associados.id = ?1")
-    boolean validarVotoAssociado(Long id);
-
-
-
+    boolean existsByAssociado_IdIs(Long id);
 }
