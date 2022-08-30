@@ -1,0 +1,887 @@
+{
+	"info": {
+		"_postman_id": "9b701a26-38dc-4a39-9c42-c877bc11038d",
+		"name": "API",
+		"description": "API Votação.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "300899"
+	},
+	"item": [
+		{
+			"name": "pauta",
+			"item": [
+				{
+					"name": "{id pauta}",
+					"item": [
+						{
+							"name": "Endpoint Responsável por Consultar o resultado da Votação.",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pauta/:id_pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta",
+										":id_pauta"
+									],
+									"variable": [
+										{
+											"key": "id_pauta",
+											"value": "49639870",
+											"description": "(Required) Id da pauta."
+										}
+									]
+								},
+								"description": "Método para consulta os votos da pauta."
+							},
+							"response": [
+								{
+									"name": "Pauta Cadastrada",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Erro da Aplicação",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Erro do Servidor",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint Responsável por Abrir a Votação da Pauta.",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pauta/:id_pauta?tempo_limite=-18395137",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta",
+										":id_pauta"
+									],
+									"query": [
+										{
+											"key": "tempo_limite",
+											"value": "-18395137",
+											"description": "(Required) Tempo Limite de Votação Aberta (Tempo em Minutos)."
+										}
+									],
+									"variable": [
+										{
+											"key": "id_pauta",
+											"value": "49639870",
+											"description": "(Required) Id da pauta."
+										}
+									]
+								},
+								"description": "Método para abrir a votação da pautas."
+							},
+							"response": [
+								{
+									"name": "Votação Iniciada com Sucesso",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta?tempo_limite=-18395137",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"query": [
+												{
+													"key": "tempo_limite",
+													"value": "-18395137"
+												}
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Erro da Aplicação",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta?tempo_limite=-18395137",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"query": [
+												{
+													"key": "tempo_limite",
+													"value": "-18395137"
+												}
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Erro do Servidor",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/pauta/:id_pauta?tempo_limite=-18395137",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pauta",
+												":id_pauta"
+											],
+											"query": [
+												{
+													"key": "tempo_limite",
+													"value": "-18395137"
+												}
+											],
+											"variable": [
+												{
+													"key": "id_pauta",
+													"value": "49639870",
+													"description": "(Required) Id da pauta."
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Endpoint Responsável por Listar as Pautas.",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pauta",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pauta"
+							]
+						},
+						"description": "Método para listas as pautas."
+					},
+					"response": [
+						{
+							"name": "Pauta Cadastrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Erro da Aplicação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Erro do Servidor",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Endpoint Responsável por criar a Pauta.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"descricao\": \"sint eiusmod tempor ve\",\n  \"tempo-liberacao\": 79714313\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pauta",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pauta"
+							]
+						},
+						"description": "Método para criar a pauta."
+					},
+					"response": [
+						{
+							"name": "Pauta Cadastrada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricao\": \"sint eiusmod tempor ve\",\n  \"tempo-liberacao\": 79714313\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Erro da Aplicação",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricao\": \"sint eiusmod tempor ve\",\n  \"tempo-liberacao\": 79714313\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Erro do Servidor",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricao\": \"sint eiusmod tempor ve\",\n  \"tempo-liberacao\": 79714313\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pauta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pauta"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Endpoint Responsável por votar na Pauta.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id_pauta\": 11625165,\n  \"voto\": false,\n  \"id_associado\": -24637807\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/votacao",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"votacao"
+					]
+				},
+				"description": "Método para enviar a votação do associado a pauta."
+			},
+			"response": [
+				{
+					"name": "Voto computado com Sucesso.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_pauta\": 11625165,\n  \"voto\": false,\n  \"id_associado\": -24637807\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/votacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"votacao"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Erro da Aplicação",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_pauta\": 11625165,\n  \"voto\": false,\n  \"id_associado\": -24637807\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/votacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"votacao"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Erro do Servidor",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_pauta\": 11625165,\n  \"voto\": false,\n  \"id_associado\": -24637807\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/votacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"votacao"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Endpoint Responsável por Cadastrar o Associado.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cpf\": \"eacillum vo\",\n  \"nome\": \"aliquip velit dolor tempor\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/associado",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"associado"
+					]
+				},
+				"description": "Método para cadastar o associado."
+			},
+			"response": [
+				{
+					"name": "Id do Associado Cadastrado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"eacillum vo\",\n  \"nome\": \"aliquip velit dolor tempor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/associado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"associado"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Erro da Aplicação",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"eacillum vo\",\n  \"nome\": \"aliquip velit dolor tempor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/associado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"associado"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Erro do Servidor",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"eacillum vo\",\n  \"nome\": \"aliquip velit dolor tempor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/associado",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"associado"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
