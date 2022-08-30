@@ -40,20 +40,19 @@ public class PautaServiceImpl implements PautaService {
             logger.info("[CADASTRANDO PAUTA]");
             Pauta pauta = new Pauta();
             pauta.setDescricao(dto.getDescricao());
-            pauta.setTempoLiberado(dto.getTempoLiberado());
             Pauta pautaRetorno = pautaRepository.save(pauta);
 
             PautaResponseDTO response = preencheRetorno(pautaRetorno);
             return response;
         } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Cadastrar Associado", ex);
+            throw new ExceptionDefault("Erro no método Cadastrar Pauta", ex);
         }
     }
 
     private PautaResponseDTO preencheRetorno(Pauta pautaRetorno) {
         PautaResponseDTO response = new PautaResponseDTO();
-        response.setDescricao(pautaRetorno.getDescricao());
         response.setId(pautaRetorno.getId());
+        response.setDescricao(pautaRetorno.getDescricao());
         response.setTempoLiberado(pautaRetorno.getTempoLiberado());
         return response;
     }
@@ -65,7 +64,7 @@ public class PautaServiceImpl implements PautaService {
             List<Pauta> listaPautas = pautaRepository.findAll();
             return listaPautas.stream().map(item -> preencheRetorno(item)).collect(Collectors.toList());
         } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Cadastrar Associado", ex);
+            throw new ExceptionDefault("Erro no método Consultar Pauta", ex);
         }
     }
 
@@ -89,7 +88,7 @@ public class PautaServiceImpl implements PautaService {
             dto.setPauta(preencheRetorno(pauta));
             return dto;
         } catch (Exception ex) {
-            throw new ExceptionDefault("Erro no método Consultar Pauta", ex);
+            throw new ExceptionDefault("Erro no método Consultar Dados Votacao da Pauta", ex);
         }
     }
 

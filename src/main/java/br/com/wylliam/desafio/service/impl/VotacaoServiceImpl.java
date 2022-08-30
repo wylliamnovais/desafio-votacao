@@ -1,15 +1,16 @@
 package br.com.wylliam.desafio.service.impl;
 
+import br.com.wylliam.desafio.constants.RabbitmqConstants;
 import br.com.wylliam.desafio.domain.entity.dto.VotoRequestDTO;
 import br.com.wylliam.desafio.domain.entity.dto.VotoResponseDTO;
 import br.com.wylliam.desafio.domain.entity.entity.Associado;
 import br.com.wylliam.desafio.domain.entity.entity.Pauta;
 import br.com.wylliam.desafio.domain.entity.entity.Votacao;
-import br.com.wylliam.desafio.exception.ExceptionDefault;
 import br.com.wylliam.desafio.exception.RegraDeNegocioException;
 import br.com.wylliam.desafio.repository.VotacaoRepository;
 import br.com.wylliam.desafio.service.AssociadoService;
 import br.com.wylliam.desafio.service.PautaService;
+import br.com.wylliam.desafio.service.RabbitMqService;
 import br.com.wylliam.desafio.service.VotacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class VotacaoServiceImpl implements VotacaoService {
     @Autowired
     private AssociadoService associadoService;
 
+    @Autowired
+    private RabbitMqService rabbitMqService;
+
 
     @Override
     public VotoResponseDTO votar(VotoRequestDTO dto) {
@@ -41,6 +45,8 @@ public class VotacaoServiceImpl implements VotacaoService {
             votacao.setAssociado(associado);
 
             Votacao votacaoResult = votacaoRepository.save(votacao);
+
+            rabbitMqService.enviarParcial(RabbitmqConstants.FILA_VOTACAO, votacaoResult.toString());
 
             return preencheRetorno(votacaoResult);
     }
@@ -62,6 +68,7 @@ public class VotacaoServiceImpl implements VotacaoService {
         boolean tempoEsgotado = atual.after(pautaRetorno.getDataFechamentoVotacao());
 
         if (tempoEsgotado) {
+            rabbitMqService.enviarTotal(RabbitmqConstants.FILA_VOTACAO_ENCERRADA, pautaRetorno.toString());
             throw new RegraDeNegocioException("Votação da Pauta já está encerrada!");
         }
 
